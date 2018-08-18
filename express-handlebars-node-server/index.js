@@ -17,7 +17,19 @@ app.set('views', path.join(__dirname, 'views'));
 app.get('/', (request, response) => {
    response.render('home', {
        name: 'World'
-   })
+   });
+});
+
+app.get('/parameters/:param', (req, res) => {
+    res.render('pathParam', {
+        param: req.params.param
+    });
+});
+
+app.get('/parameters', (req, res) => {
+   res.render('queryParam', {
+       param: req.query.param
+   });
 });
 
 app.listen(port, (err) => {
