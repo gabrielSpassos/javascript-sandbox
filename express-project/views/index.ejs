@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Express Project</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h2>TCP UI</h2>
+
+    <form action="/message" method="post">
+      <label for="team_name">Digite a mensagem: </label>
+      <input id="message" type="text" name="message">
+      <input type="submit" value="OK">
+    </form>
+
+    <h2>Resultado do server TCP</h2>
+    <p><%= result %></p>
+  </body>
+</html>
