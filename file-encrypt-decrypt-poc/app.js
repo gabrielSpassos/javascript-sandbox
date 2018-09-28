@@ -11,29 +11,22 @@ const decipher = crypto.createDecipher(encryptAlgorithm, password);
 
 // file reader
 const fileText = fs.readFileSync('test.txt', 'utf8');
+console.log('Inicio:', fileText);
 
 // encrypt
-const crypted = crypt(fileText);
-console.log('Crypted', crypted);
+const crypted = cipher.update(fileText, 'utf8', 'hex');
 
 writeFile('encrypted.txt',crypted);
 
-const decryptedFileText = fs.readFileSync('encrypted.txt');
-console.log('Decrypted', decryptedFileText);
-const decrypted = decrypt(decryptedFileText);
+const decryptedFileText = fs.readFileSync('encrypted.txt', 'utf8');
 
-writeFile('fim.txt', decrypted);
+// decrypt
+const decrypted = decipher.update(decryptedFileText, 'hex', 'utf8');
 
-function crypt(textToCrypt) {
-    return cipher.update(textToCrypt, 'utf8', 'hex');
-}
-
-function decrypt(textToDecrypt) {
-    return decipher.update(textToDecrypt, 'hex', 'utf8');
-}
+writeFile('result.txt', decrypted);
 
 function writeFile(fileName, encryptedText) {
-    fs.writeFile(`./${fileName}`, encryptedText, (err) => {
+    fs.writeFile(`${fileName}`, encryptedText, (err) => {
         if(err) {
             console.log('Error on create file', err);
         }
