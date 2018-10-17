@@ -11,5 +11,9 @@
   "devDependencies": {
     "crypto": "^1.0.1",
     "fs": "0.0.1-security"
+  },
+  "dependencies": {
+    "promise": "^8.0.2",
+    "q": "^1.5.1"
   }
 }
