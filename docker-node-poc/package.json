@@ -1,0 +1,27 @@
+{
+  "name": "docker-node-poc",
+  "version": "1.0.0",
+  "description": "Poc to test docker with node",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielSpassos/node-sandbox.git"
+  },
+  "keywords": [
+    "docker",
+    "node"
+  ],
+  "author": "Gabriel Santos dos Passos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielSpassos/node-sandbox/issues"
+  },
+  "homepage": "https://github.com/gabrielSpassos/node-sandbox#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
