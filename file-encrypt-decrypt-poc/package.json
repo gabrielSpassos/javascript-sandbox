@@ -13,6 +13,7 @@
     "fs": "0.0.1-security"
   },
   "dependencies": {
+    "dotenv": "^6.1.0",
     "promise": "^8.0.2",
     "q": "^1.5.1"
   }

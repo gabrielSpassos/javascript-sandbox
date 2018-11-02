@@ -1,6 +1,9 @@
+require('dotenv').load();
 const fs = require('fs');
 const crypto = require('crypto');
 const q = require('q');
+
+const FILENAME = process.env.FILENAME || 'test.txt';
 
 // crypt info
 const encryptAlgorithm = 'aes-256-ctr';
@@ -10,7 +13,7 @@ const password = 'senha123456';
 const cipher = crypto.createCipher(encryptAlgorithm, password);
 const decipher = crypto.createDecipher(encryptAlgorithm, password);
 
-readFile('test.txt', 'utf8')
+readFile(FILENAME, 'utf8')
     .then((fileText) => {
         console.log('STEP 1 - Without encryption:', fileText);
         return encrypt(fileText, 'utf8', 'hex')
