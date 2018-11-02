@@ -15,6 +15,20 @@ module.exports = function() {
         }
     ];
 
+    this.isUserRegistered = (login, password) => {
+        const deferred = q.defer();
+        let isRegistered = false;
+
+        database.forEach((user) => {
+            if(user.login === login && user.password === password) {
+                isRegistered = true;
+                return isRegistered;
+            }
+        });
+        deferred.resolve(isRegistered);
+        return deferred.promise;
+    };
+
     this.getUserIdByLoginAndPassword = function(login, password) {
         const deferred = q.defer();
 
