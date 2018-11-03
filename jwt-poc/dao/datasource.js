@@ -41,6 +41,19 @@ module.exports = function() {
         return deferred.promise;
     };
 
+    this.getUserById = (id) => {
+        const deferred = q.defer();
+
+        database.forEach((user) => {
+            if(user.id === id) {
+                deferred.resolve(user);
+                return user;
+            }
+        });
+
+        return deferred.promise;
+    };
+
     return this;
 };
 

@@ -23,18 +23,6 @@ module.exports = function (app) {
         const login = req.body.login;
         const pass = req.body.pass;
 
-        // datasource.isUserRegistered(login, pass)
-        //     .then(() => {
-        //         return datasource.getUserIdByLoginAndPassword(login, pass);
-        //     }).then((userId) => {
-        //         let token = jwt.sign({userId}, process.env.SECRET, {
-        //             expiresIn: process.env.EXPIRE
-        //         });
-        //         console.log('ID', userId);
-        //         res.status(200).send(
-        //             {auth: true, token: token}
-        //         );
-        //     });
         datasource.isUserRegistered(login, pass)
             .then((isRegistred) => {
                 console.log('Result', isRegistred);
@@ -42,7 +30,7 @@ module.exports = function (app) {
                     datasource.getUserIdByLoginAndPassword(login, pass)
                         .then((userId) => {
                             let token = jwt.sign({userId}, process.env.SECRET, {
-                                expiresIn: process.env.EXPIRE
+                                expiresIn: 300
                             });
                             console.log('ID', userId);
                             res.status(200).send(
