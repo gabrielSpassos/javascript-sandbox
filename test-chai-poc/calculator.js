@@ -1,19 +1,24 @@
-exports.sum = (x, y) => {
-   return x + y;
-};
+class Calculator {
 
-exports.minus = (x, y) => {
-  return x - y;
-};
+    sum(x, y) {
+        return x + y;
+    };
 
-exports.multiple = (x, y) => {
-    return x * y;
-};
+    minus(x, y) {
+        return x - y;
+    };
 
-exports.div = (x, y) => {
-    return x / y;
-};
+    multiple (x, y) {
+        return x * y;
+    };
 
-exports.pow = (x) => {
-  return x * x;
-};
+    div (x, y) {
+        return x / y;
+    };
+
+    pow (x) {
+        return x * x;
+    };
+}
+
+module.exports = Calculator;

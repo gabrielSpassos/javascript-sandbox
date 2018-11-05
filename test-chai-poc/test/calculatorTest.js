@@ -1,15 +1,18 @@
 const expect = require('chai').expect;
-const calculator = require('../calculator');
+const calculator = require('../calculator.js');
 
 describe('calculate', () => {
-    it('should return sum equals 10', function () {
 
+    //before
+    const calc = new calculator();
+
+    it('should return sum equals 10', function () {
         //given
         let x = 2;
         let y = 8;
 
         //when
-        let result = calculator.sum(x, y);
+        let result = calc.sum(x, y);
 
         //then
         expect(result).to.be.equal(10);
@@ -21,7 +24,7 @@ describe('calculate', () => {
         let y = 10;
 
         //when
-        let result = calculator.minus(x, y);
+        let result = calc.minus(x, y);
 
         //then
         expect(result).to.be.equal(-2);
@@ -33,7 +36,7 @@ describe('calculate', () => {
         let y = 8;
 
         //when
-        let result = calculator.multiple(x, y);
+        let result = calc.multiple(x, y);
 
         //then
         expect(result).to.be.equal(40);
@@ -45,7 +48,7 @@ describe('calculate', () => {
         let y = 7;
 
         //when
-        let result = calculator.div(x, y);
+        let result = calc.div(x, y);
 
         //then
         expect(result).to.be.equal(9);
@@ -56,7 +59,7 @@ describe('calculate', () => {
         let x = 5;
 
         //when
-        let result = calculator.pow(x);
+        let result = calc.pow(x);
 
         //then
         expect(result).to.be.equal(25);
