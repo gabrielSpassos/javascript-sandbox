@@ -1,9 +1,10 @@
+const Datasource = require('../dao/datasource.js');
 
 module.exports = function (app) {
 
     app.get('/users', (req, res) => {
         const tokenService = app.security.tokenService;
-        const datasource = app.dao.datasource;
+        const datasource = new Datasource();
 
         tokenService.verifyToken(req, res)
             .then((userId) => {

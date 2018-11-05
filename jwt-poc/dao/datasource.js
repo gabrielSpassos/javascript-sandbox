@@ -1,21 +1,21 @@
 const q = require('q');
 
-module.exports = function() {
+const database = [
+    {
+        id: 1,
+        login: "Gabriel",
+        password: "123"
+    },
+    {
+        id: 2,
+        login: "Rafael",
+        password: "456"
+    }
+];
 
-    const database = [
-        {
-            id: 1,
-            login: "Gabriel",
-            password: "123"
-        },
-        {
-            id: 2,
-            login: "Rafael",
-            password: "456"
-        }
-    ];
+class Datasource {
 
-    this.isUserRegistered = (login, password) => {
+    isUserRegistered(login, password) {
         const deferred = q.defer();
         let isRegistered = false;
 
@@ -29,7 +29,7 @@ module.exports = function() {
         return deferred.promise;
     };
 
-    this.getUserIdByLoginAndPassword = function(login, password) {
+    getUserIdByLoginAndPassword(login, password) {
         const deferred = q.defer();
 
         database.forEach((user) => {
@@ -41,7 +41,7 @@ module.exports = function() {
         return deferred.promise;
     };
 
-    this.getUserById = (id) => {
+    getUserById(id) {
         const deferred = q.defer();
 
         database.forEach((user) => {
@@ -53,9 +53,10 @@ module.exports = function() {
 
         return deferred.promise;
     };
+}
 
-    return this;
-};
+module.exports = Datasource;
+
 
 
 

@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
+const Datasource = require('../dao/datasource.js');
 
 module.exports = function (app) {
 
     app.get('/login', (req, res) => {
-       const datasource = app.dao.datasource;
+       const datasource = new Datasource();
 
         const login = req.query.login;
         const pass = req.query.pass;
@@ -18,7 +19,7 @@ module.exports = function (app) {
     });
 
     app.post('/login', (req, res) => {
-        const datasource = app.dao.datasource;
+        const datasource = new Datasource();
 
         const login = req.body.login;
         const pass = req.body.pass;

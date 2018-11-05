@@ -11,7 +11,6 @@ app.set('views', './views');
 
 consign()
 .include('./routes')
-.then('./dao/datasource.js')
 .then('./security/tokenService.js')
 .into(app);
 
