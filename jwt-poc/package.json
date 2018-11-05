@@ -20,5 +20,9 @@
     "jsonwebtoken": "^8.3.0",
     "nodemon": "^1.18.5",
     "q": "^1.5.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
   }
 }
