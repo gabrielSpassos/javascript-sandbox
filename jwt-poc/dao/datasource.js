@@ -3,13 +3,21 @@ const q = require('q');
 const database = [
     {
         id: 1,
-        login: "Gabriel",
-        password: "123"
+        login: "gabriel@gmail.com",
+        password: "123",
+		cpf: "000.000.000-00",
+		age: 21,
+		name: "Gabriel",
+		description: "Nice Guy"
     },
     {
         id: 2,
-        login: "Rafael",
+        login: "rafael@gmail.com",
         password: "456"
+		cpf: "000.000.000-00",
+		age: 60,
+		name: "Rafael",
+		description: "Bad Guy"
     }
 ];
 
