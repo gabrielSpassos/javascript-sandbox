@@ -13,7 +13,7 @@ const database = [
     {
         id: 2,
         login: "rafael@gmail.com",
-        password: "456"
+        password: "456",
 		cpf: "000.000.000-00",
 		age: 60,
 		name: "Rafael",
