@@ -3,7 +3,13 @@
     margin: 10px;
 }
 
-#star-wars-table {
-    margin: 10px;
-    border: black;
+table,th,td, caption{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 5px;
+}
+
+caption {
+    border-bottom: none;
 }
