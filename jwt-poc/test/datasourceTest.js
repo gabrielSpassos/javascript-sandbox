@@ -8,7 +8,7 @@ describe('isUserRegister', () => {
 
     it('should return true', async () => {
         //given
-        let login = 'Gabriel';
+        let login = 'gabriel@gmail.com';
         let password = '123';
 
         //when
