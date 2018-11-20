@@ -1,0 +1,15 @@
+#btn {
+    border-radius: 5px;
+    margin: 10px;
+}
+
+table,th,td, caption{
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 5px;
+}
+
+caption {
+    border-bottom: none;
+}
