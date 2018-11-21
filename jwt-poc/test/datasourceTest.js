@@ -32,7 +32,7 @@ describe('isUserRegister', () => {
 
     it('should return id 1', async () => {
         //given
-        let login = 'Gabriel';
+        let login = 'gabriel@gmail.com';
         let password = '123';
 
         //when
