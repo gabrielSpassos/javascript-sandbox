@@ -29,6 +29,11 @@ describe('isUserRegister', () => {
         //then
         assert.isFalse(result)
     });
+});
+
+describe('getUserIdByLoginAndPassword', () => {
+    // before
+    const dao = new Datasource();
 
     it('should return id 1', async () => {
         //given
@@ -41,5 +46,4 @@ describe('isUserRegister', () => {
         //then
         expect(result).to.be.equal(1);
     });
-
 });
