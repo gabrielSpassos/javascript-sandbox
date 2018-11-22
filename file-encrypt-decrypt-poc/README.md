@@ -16,7 +16,7 @@ node -v
 npm -v
 ```
 
-_Se os dois retornarem siga para o tópico "Uso"_
+_Se os dois retornarem siga direto para o tópico "Uso"_
 
 * Instalar NPM
 > https://www.npmjs.com/get-npm
