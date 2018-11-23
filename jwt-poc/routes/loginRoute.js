@@ -11,14 +11,12 @@ module.exports = function (app) {
 
         datasource.isUserRegistered(login, pass)
             .then((isRegistred) => {
-                console.log('Result', isRegistred);
                 if(isRegistred) {
                     datasource.getUserIdByLoginAndPassword(login, pass)
                         .then((userId) => {
                             let token = jwt.sign({userId}, process.env.SECRET, {
                                 expiresIn: 300
                             });
-                            console.log('ID', userId);
                             res.status(200).send(
                                 {auth: true, token: token}
                             );

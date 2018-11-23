@@ -17,7 +17,25 @@ const database = [
 		cpf: "000.000.000-00",
 		age: 60,
 		name: "Rafael",
-		description: "Bad Guy"
+		description: "Likes JS"
+    },
+    {
+        id: 3,
+        login: "lucas@gmail.com",
+        password: "abc",
+        cpf: "000.000.000-00",
+        age: 36,
+        name: "Lucas",
+        description: "Star Wars fan"
+    },
+    {
+        id: 4,
+        login: "tomas@gmail.com",
+        password: "def",
+        cpf: "000.000.000-00",
+        age: 41,
+        name: "Tomas",
+        description: "Good guy"
     }
 ];
 

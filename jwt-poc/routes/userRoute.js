@@ -11,6 +11,8 @@ module.exports = function (app) {
                 return datasource.getUserById(userId);
             }).then((user) => {
                 return res.status(200).send(user);
+            }).catch(() => {
+                return res.status(500).send({message: 'Error getting users info'})
             })
     });
 };
