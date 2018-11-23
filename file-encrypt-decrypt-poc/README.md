@@ -6,16 +6,17 @@
 
 * Instalar NodeJs
 > https://nodejs.org/en/download/ (Windows/Mac)
+
 > https://www.digitalocean.com/community/tutorials/como-instalar-o-node-js-no-ubuntu-16-04-pt (Linux)
 
-* Teste
+* Teste, abra o terminal e execute: 
 ```
 node -v
 
 npm -v
 ```
 
-_Se os dois retornarem siga para o tópico "Uso"_
+_Se os dois retornarem siga direto para o tópico "Uso"_
 
 * Instalar NPM
 > https://www.npmjs.com/get-npm
