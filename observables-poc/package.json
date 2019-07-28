@@ -1,0 +1,21 @@
+{
+  "name": "observables-poc",
+  "version": "1.0.0",
+  "description": "Hot observables example",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r esm main.js"
+  },
+  "keywords": [
+    "Hot",
+    "Cold",
+    "Observables"
+  ],
+  "author": "Gabriel Passos",
+  "license": "ISC",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "rxjs": "^6.5.2"
+  }
+}
