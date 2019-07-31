@@ -11,3 +11,15 @@ npm install
 ```
 npm start
 ```
+
+```
+node -r esm hot-observable.js
+```
+
+```
+node -r esm cold-observable.js
+```
+
+```
+node -r esm warn-observable.js
+```
