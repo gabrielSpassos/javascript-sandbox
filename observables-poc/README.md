@@ -23,3 +23,7 @@ node -r esm cold-observable.js
 ```
 node -r esm warn-observable.js
 ```
+
+```
+node -r esm example.js
+```
