@@ -1,0 +1,20 @@
+meta {
+    name: Dolar collection
+    type: http
+    seq: 1
+}
+
+get {
+    url: {{baseUrl}}/last/USD-BRL
+    body: none
+}
+
+headers {
+    Content-Type: application/json
+}
+
+tests {
+  test("should be able to fetch info", function() {
+    expect(res.status).to.equal(201);
+  });
+}
