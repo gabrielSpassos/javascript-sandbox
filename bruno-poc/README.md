@@ -19,6 +19,11 @@ npm install -g @usebruno/cli
 bru run --env Local
 ```
 
+- Run and collect responses
+```shell
+bru run --env Local --output results.json 
+```
+
 ## Public API
 
 - https://docs.awesomeapi.com.br/api-de-moedas

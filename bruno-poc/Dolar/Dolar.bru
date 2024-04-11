@@ -10,11 +10,16 @@ get {
 }
 
 headers {
-    Content-Type: application/json
+    Content-Type: application/json,
+    Accept: application/json
 }
 
 tests {
   test("should be able to fetch info", function() {
-    expect(res.status).to.equal(201);
+    expect(res.status).to.equal(200);
+  });
+
+  test("should contains USD-BRL info", function() {
+    expect(res.body).to.have.property('USDBRL');
   });
 }
