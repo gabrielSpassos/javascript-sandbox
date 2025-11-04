@@ -13,13 +13,3 @@ services:
       - K6_WEB_DASHBOARD_EXPORT=/results/html-report.html
     command: >
       run /scripts/stress-test.js
-
-volumes:
-  k6_stress_test_poc_grafana_data:
-
-networks:
-  k6-stress-test-poc:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.5.0.0/16
