@@ -1,0 +1,25 @@
+services:
+  k6:
+    image: grafana/k6:latest
+    container_name: k6
+    volumes:
+      - ./stress-test.js:/scripts/stress-test.js
+      - ./results:/results
+    networks:
+      k6-stress-test-poc:
+        ipv4_address: 10.5.0.4
+    environment:
+      - K6_WEB_DASHBOARD=true
+      - K6_WEB_DASHBOARD_EXPORT=/results/html-report.html
+    command: >
+      run /scripts/stress-test.js
+
+volumes:
+  k6_stress_test_poc_grafana_data:
+
+networks:
+  k6-stress-test-poc:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
