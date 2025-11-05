@@ -44,6 +44,13 @@ docker compose up
     data_sent......................: 185 kB 4.6 kB/s
 ```
 
+### Check report
+```
+cp ./results/html-report.html ~/Downloads/
+firefox ~/Downloads/html-report.html
+```
+![report](results/report-output.png)
+
 ### References
 
 - https://www.baeldung.com/k6-framework-load-testing
