@@ -1,86 +1,88 @@
-import fs from "fs";
-import { Toxiproxy } from "toxiproxy-node-client";
-import { getCurrentTime } from "../src/app.js";
+import test from "node:test";
+import assert from "node:assert";
+import { PostgreSqlContainer } from "@testcontainers/postgresql";
+import { ToxiProxyContainer } from "@testcontainers/toxiproxy";
 
+import { connect, close } from "../src/db.js";
+import { currentTime } from "../src/app.js";
+
+let postgres;
+let toxiproxy;
 let proxy;
 
 beforeAll(async () => {
+    postgres = await new PostgreSqlContainer("postgres:17")
+        .start();
 
-    const state =
-        JSON.parse(
-            fs.readFileSync(".test-state.json")
-        );
+    toxiproxy = await new ToxiProxyContainer()
+        .start();
 
-    const client = new Toxiproxy({
-        host: state.toxiproxyHost,
-        port: state.toxiproxyPort
+    proxy = await toxiproxy.createProxy(
+        postgres,
+        5432
+    );
+
+    connect({
+        host: proxy.host,
+        port: proxy.port,
+        database: postgres.getDatabase(),
+        user: postgres.getUsername(),
+        password: postgres.getPassword()
     });
+});
 
-    proxy = await client.getProxy("postgres");
+afterAll(async () => {
+    await close();
+    await toxiproxy.stop();
+    await postgres.stop();
 });
 
 afterEach(async () => {
     await proxy.removeAllToxics();
 });
 
-test("database works normally", async () => {
-
-    const result = await getCurrentTime();
+test("should query postgres", async () => {
+    const result = await currentTime();
 
     expect(result.now).toBeDefined();
 });
 
-test("latency chaos", async () => {
-
-    await proxy.addToxic({
-        name: "slow",
-        type: "latency",
-        stream: "downstream",
-        attributes: {
-            latency: 3000,
-            jitter: 500
-        }
+test("should inject latency", async () => {
+    await proxy.addLatency({
+        toxicity: 1,
+        latency: 3000,
+        jitter: 500
     });
 
     const start = Date.now();
 
-    await getCurrentTime();
+    await currentTime();
 
     const elapsed = Date.now() - start;
 
     expect(elapsed).toBeGreaterThan(2500);
 });
 
-test("timeout chaos", async () => {
-
-    await proxy.addToxic({
-        name: "timeout",
-        type: "timeout",
-        stream: "downstream",
-        attributes: {
-            timeout: 0
-        }
-    });
-
-    await expect(getCurrentTime())
-        .rejects
-        .toThrow();
-});
-
-test("recovery after chaos", async () => {
-
-    await proxy.addToxic({
-        name: "slow",
-        type: "latency",
-        stream: "downstream",
-        attributes: {
-            latency: 5000
-        }
+test("should recover after latency removal", async () => {
+    await proxy.addLatency({
+        latency: 4000
     });
 
     await proxy.removeAllToxics();
 
-    const result = await getCurrentTime();
+    const start = Date.now();
 
-    expect(result.now).toBeDefined();
+    await currentTime();
+
+    const elapsed = Date.now() - start;
+
+    expect(elapsed).toBeLessThan(1000);
+});
+
+test("should timeout", async () => {
+    await proxy.addTimeout({
+        timeout: 0
+    });
+
+    await expect(currentTime()).rejects.toThrow();
 });

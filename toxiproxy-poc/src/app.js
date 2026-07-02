@@ -1,6 +1,6 @@
-import pool from "./db.js";
+import { query } from "./db.js";
 
-export async function getCurrentTime() {
-    const result = await pool.query("SELECT NOW()");
-    return result.rows[0];
+export async function currentTime() {
+    const rows = await query("SELECT NOW() AS now");
+    return rows[0];
 }
