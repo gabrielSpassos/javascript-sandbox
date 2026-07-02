@@ -1,88 +1,110 @@
 import test from "node:test";
-import assert from "node:assert";
+import assert from "node:assert/strict";
+
+import { Network } from "testcontainers";
 import { PostgreSqlContainer } from "@testcontainers/postgresql";
 import { ToxiProxyContainer } from "@testcontainers/toxiproxy";
 
 import { connect, close } from "../src/db.js";
 import { currentTime } from "../src/app.js";
 
+let network;
 let postgres;
 let toxiproxy;
 let proxy;
 
-beforeAll(async () => {
-    postgres = await new PostgreSqlContainer("postgres:17")
-        .start();
+test.before(async () => {
+  network = await new Network().start();
 
-    toxiproxy = await new ToxiProxyContainer()
-        .start();
+  postgres = await new PostgreSqlContainer("postgres:17")
+    .withNetwork(network)
+    .withNetworkAliases("postgres")
+    .start();
 
-    proxy = await toxiproxy.createProxy(
-        postgres,
-        5432
-    );
+  toxiproxy = await new ToxiProxyContainer()
+    .withNetwork(network)
+    .start();
 
-    connect({
-        host: proxy.host,
-        port: proxy.port,
-        database: postgres.getDatabase(),
-        user: postgres.getUsername(),
-        password: postgres.getPassword()
-    });
+  proxy = await toxiproxy.createProxy({
+    name: "postgres",
+    upstream: "postgres:5432"
+  });
+
+  connect({
+    host: proxy.host,
+    port: proxy.port,
+    database: postgres.getDatabase(),
+    user: postgres.getUsername(),
+    password: postgres.getPassword()
+  });
 });
 
-afterAll(async () => {
-    await close();
-    await toxiproxy.stop();
-    await postgres.stop();
+test.after(async () => {
+  await close();
+  await toxiproxy.stop();
+  await postgres.stop();
+  await network.stop();
 });
 
-afterEach(async () => {
-    await proxy.removeAllToxics();
+test.afterEach(async () => {
+  const toxics = await proxy.instance.getToxics();
+
+  for (const toxic of toxics) {
+    await toxic.remove();
+  }
+
+  await proxy.setEnabled(true);
 });
 
 test("should query postgres", async () => {
-    const result = await currentTime();
+  const result = await currentTime();
 
-    expect(result.now).toBeDefined();
+  assert.ok(result.now);
 });
 
-test("should inject latency", async () => {
-    await proxy.addLatency({
-        toxicity: 1,
-        latency: 3000,
-        jitter: 500
-    });
+test("should add latency", async () => {
 
-    const start = Date.now();
+  await proxy.instance.addToxic({
+    name: "latency",
+    type: "latency",
+    stream: "upstream",
+    toxicity: 1,
+    attributes: {
+      latency: 2000,
+      jitter: 0
+    }
+  });
 
+  const start = Date.now();
+
+  await currentTime();
+
+  const elapsed = Date.now() - start;
+
+  assert.ok(elapsed >= 1900);
+});
+
+test("should disable proxy", async () => {
+
+  await proxy.setEnabled(false);
+
+  await assert.rejects(async () => {
     await currentTime();
+  });
 
-    const elapsed = Date.now() - start;
-
-    expect(elapsed).toBeGreaterThan(2500);
 });
 
-test("should recover after latency removal", async () => {
-    await proxy.addLatency({
-        latency: 4000
-    });
+test("should recover after enabling proxy", async () => {
 
-    await proxy.removeAllToxics();
+  await proxy.setEnabled(false);
 
-    const start = Date.now();
-
+  await assert.rejects(async () => {
     await currentTime();
+  });
 
-    const elapsed = Date.now() - start;
+  await proxy.setEnabled(true);
 
-    expect(elapsed).toBeLessThan(1000);
-});
+  const result = await currentTime();
 
-test("should timeout", async () => {
-    await proxy.addTimeout({
-        timeout: 0
-    });
-
-    await expect(currentTime()).rejects.toThrow();
+  assert.ok(result.now);
 });
