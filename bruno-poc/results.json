@@ -1,0 +1,97 @@
+{
+  "summary": {
+    "totalRequests": 1,
+    "passedRequests": 1,
+    "failedRequests": 0,
+    "totalAssertions": 0,
+    "passedAssertions": 0,
+    "failedAssertions": 0,
+    "totalTests": 2,
+    "passedTests": 2,
+    "failedTests": 0
+  },
+  "results": [
+    {
+      "test": {
+        "filename": "Dolar/Dolar.bru"
+      },
+      "request": {
+        "method": "GET",
+        "url": "https://economia.awesomeapi.com.br/last/USD-BRL",
+        "headers": {
+          "Content-Type": "application/json,",
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "statusText": "OK",
+        "headers": {
+          "date": "Thu, 11 Apr 2024 13:32:14 GMT",
+          "content-type": "application/json; charset=utf-8",
+          "transfer-encoding": "chunked",
+          "connection": "close",
+          "access-control-allow-origin": "*",
+          "access-control-allow-methods": "HEAD,OPTIONS,GET,POST",
+          "access-control-allow-headers": "Authorization,Content-Type,X-Worker-Token",
+          "content-security-policy": "img-src 'self' *.awesomeapi.com.br;default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+          "cross-origin-opener-policy": "unsafe-none",
+          "cross-origin-resource-policy": "cross-origin",
+          "x-dns-prefetch-control": "off",
+          "expect-ct": "max-age=0",
+          "x-frame-options": "SAMEORIGIN",
+          "strict-transport-security": "max-age=63072000; includeSubDomains",
+          "x-download-options": "noopen",
+          "x-content-type-options": "nosniff",
+          "origin-agent-cluster": "?1",
+          "x-permitted-cross-domain-policies": "none",
+          "referrer-policy": "no-referrer",
+          "x-xss-protection": "0",
+          "cache-control": "max-age=30, public, stale-while-revalidate=259200, stale-if-error=259200",
+          "pragma": "cache",
+          "etag": "W/\"f1-FSYYCOF1Gx14W7Rl9jQlAqv7viQ\"",
+          "cf-cache-status": "HIT",
+          "age": "6",
+          "report-to": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=DcKwo%2BQpuWxSX3hgMNvUst1Qq4%2FtloyrsEOoN31VMZHzcndFUK%2Bz6PKC%2BNCEaMDpKfJUdHAPRweJb%2FVAIdSQlUV7yW5CRO0ivBsT%2FiBObRku%2FiY7DmGVQHt77KT2U5407GattJtKkqMMClj5\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+          "nel": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+          "vary": "Accept-Encoding",
+          "server": "cloudflare",
+          "cf-ray": "872b576ccf8c0a2e-MIA",
+          "alt-svc": "h3=\":443\"; ma=86400"
+        },
+        "data": {
+          "USDBRL": {
+            "code": "USD",
+            "codein": "BRL",
+            "name": "Dólar Americano/Real Brasileiro",
+            "high": "5.0876",
+            "low": "5.0585",
+            "varBid": "0.0031",
+            "pctChange": "0.06",
+            "bid": "5.0773",
+            "ask": "5.0782",
+            "timestamp": "1712842320",
+            "create_date": "2024-04-11 10:32:00"
+          }
+        },
+        "responseTime": 806
+      },
+      "error": null,
+      "assertionResults": [],
+      "testResults": [
+        {
+          "description": "should be able to fetch info",
+          "status": "pass",
+          "uid": "Fy5hHKKCWY3Lr08ZgiG_V"
+        },
+        {
+          "description": "should contains USD-BRL info",
+          "status": "pass",
+          "uid": "Ru2xAbhmxX3n70giPxdow"
+        }
+      ],
+      "runtime": 0.83142375,
+      "suitename": "Dolar/Dolar"
+    }
+  ]
+}
