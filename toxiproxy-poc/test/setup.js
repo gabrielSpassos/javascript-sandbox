@@ -1,5 +1,6 @@
 import fs from "fs";
-import { PostgreSqlContainer, GenericContainer } from "testcontainers";
+import { GenericContainer } from "testcontainers";
+import { PostgreSqlContainer } from "@testcontainers/postgresql";
 import { Toxiproxy } from "toxiproxy-node-client";
 
 export default async function () {
