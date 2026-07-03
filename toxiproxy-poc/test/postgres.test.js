@@ -47,10 +47,20 @@ test.after(async () => {
 });
 
 test.afterEach(async () => {
-  const toxics = await proxy.instance.getToxics();
+  try {
+    const res = await proxy.instance.api.get(`${proxy.instance.getPath()}/toxics`);
+    const toxics = res.data || [];
 
-  for (const toxic of toxics) {
-    await toxic.remove();
+    for (const t of toxics) {
+      try {
+        const toxic = await proxy.instance.getToxic(t.name);
+        await toxic.remove();
+      } catch (e) {
+        // ignore individual toxic removal errors
+      }
+    }
+  } catch (e) {
+    // ignore errors when listing toxics
   }
 
   await proxy.setEnabled(true);
@@ -74,6 +84,9 @@ test("should add latency", async () => {
       jitter: 0
     }
   });
+
+  // wait briefly for the toxic to be applied
+  await new Promise((r) => setTimeout(r, 100));
 
   const start = Date.now();
 
@@ -103,6 +116,9 @@ test("should recover after enabling proxy", async () => {
   });
 
   await proxy.setEnabled(true);
+
+  // allow time for the proxy to fully enable
+  await new Promise((r) => setTimeout(r, 100));
 
   const result = await currentTime();
 
