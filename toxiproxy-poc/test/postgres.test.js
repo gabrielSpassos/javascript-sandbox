@@ -16,12 +16,12 @@ let proxy;
 test.before(async () => {
   network = await new Network().start();
 
-  postgres = await new PostgreSqlContainer("postgres:17")
+  postgres = await new PostgreSqlContainer("postgres:18-alpine")
     .withNetwork(network)
     .withNetworkAliases("postgres")
     .start();
 
-  toxiproxy = await new ToxiProxyContainer()
+  toxiproxy = await new ToxiProxyContainer("ghcr.io/shopify/toxiproxy:2.12.0")
     .withNetwork(network)
     .start();
 
