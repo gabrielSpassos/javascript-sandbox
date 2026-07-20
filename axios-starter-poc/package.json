@@ -14,6 +14,6 @@
   "author": "Gabriel Passos",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.32.0"
+    "axios": "^0.33.0"
   }
 }
